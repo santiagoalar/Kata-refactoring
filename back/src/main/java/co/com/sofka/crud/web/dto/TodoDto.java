@@ -1,4 +1,4 @@
-package co.com.sofka.crud.dto;
+package co.com.sofka.crud.web.dto;
 
 
 public class TodoDto {

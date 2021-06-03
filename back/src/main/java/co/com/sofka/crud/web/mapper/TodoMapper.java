@@ -1,11 +1,9 @@
-package co.com.sofka.crud;
+package co.com.sofka.crud.web.mapper;
 
-import co.com.sofka.crud.dto.TodoDto;
+import co.com.sofka.crud.web.dto.TodoDto;
 import co.com.sofka.crud.entity.Todo;
 import org.mapstruct.Mapper;
-import org.mapstruct.MapperConfig;
 import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;

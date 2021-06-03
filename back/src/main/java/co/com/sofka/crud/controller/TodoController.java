@@ -1,7 +1,7 @@
 package co.com.sofka.crud.controller;
 
-import co.com.sofka.crud.TodoMapper;
-import co.com.sofka.crud.dto.TodoDto;
+import co.com.sofka.crud.web.mapper.TodoMapper;
+import co.com.sofka.crud.web.dto.TodoDto;
 import co.com.sofka.crud.service.TodoService;
 import co.com.sofka.crud.entity.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
