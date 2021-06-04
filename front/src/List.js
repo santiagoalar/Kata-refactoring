@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { Store, HOST_API } from './App';
+import {HOST_API } from './App';
+import {Store} from './StoreProvider';
 
 const List = () => {
     const { dispatch, state: { todo } } = useContext(Store);

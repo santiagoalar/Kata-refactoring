@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import {HOST_API } from './App';
+import { HOST_API } from './App';
 import {Store} from './StoreProvider';
 
 const Form = () => {
@@ -50,13 +50,13 @@ const Form = () => {
       <input
         type="text"
         name="name"
-        placeholder="¿Qué piensas hacer hoy?"
+        placeholder="ToDo list"
         defaultValue={item.name}
         onChange={(event) => {
           setState({ ...state, name: event.target.value })
         }}  ></input>
-      {item.id && <button onClick={onEdit}>Actualizar</button>}
-      {!item.id && <button onClick={onAdd}>Crear</button>}
+      {item.id && <button onClick={onEdit}>Update list</button>}
+      {!item.id && <button onClick={onAdd}>Create new list</button>}
     </form>
   }
   
