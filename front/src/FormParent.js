@@ -1,64 +1,76 @@
 import React, { useContext, useRef, useState } from 'react';
-import FormToDo from './Form';
+//import ListParent from './ListParent';
 import { HOST_API } from './App';
 import {Store} from './StoreProvider';
 
 const Form = () => {
-    const formRef = useRef(null);
-    const { dispatch, state: { listTodo } } = useContext(Store);
-    const item = listTodo.item;
-    const [state, setState] = useState(item);
-  
-    const onAdd = (event) => {
-      event.preventDefault();
-  
-      const request = {
-        name: state.name,
-        id: null,
-      };
-      onFetch("POST", "add-list", request)
-    }
-  
-    const onEdit = (event) => {
-      event.preventDefault();
-  
-      const request = {
-        name: (state.name || item.name),
-        id: item.id,
-        completed: item.completed
-      };
-      onFetch("PUT", "update-list", request)
-    }
+  const formRef = useRef(null);
+  const { dispatch, state: { todoList } } = useContext(Store);
+  const item = todoList.item;
+  const [state, setState] = useState(item);
 
-    function onFetch(item_method, item_type, request){
-        fetch(HOST_API + "/todo", {
-            method: item_method,
-            body: JSON.stringify(request),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-            .then(response => response.json())
-            .then((todo) => {
-              dispatch({ type: item_type, item: todo });
-              setState({ name: "" });
-              formRef.current.reset();
-            });
-    }
-  
-    return <div ref={formRef}>
-      <input
-        type="text"
-        name="name"
-        placeholder="ToDo list"
-        defaultValue={item.name}
-        onChange={(event) => {
-          setState({ ...state, name: event.target.value })
-        }}  ></input>
-      {item.id && <button onClick={onEdit}>Update list</button>}
-      {!item.id && <button onClick={onAdd}>Create new list</button>}
-      <FormToDo/>
-    </div>
+  /** Create - Working */
+  const onAdd = (event) => {
+    event.preventDefault();
+    const request = {
+      name: state.name,
+      id: null,
+      completed: false
+    };
+    fetch(HOST_API + "/todoList", {
+      method: "POST",
+      body: JSON.stringify(request),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then((todoList) => {
+        dispatch({ type: "add-todoList-item", item: todoList });
+        setState({ name: "" });
+        formRef.current.reset();
+      });
   }
-  
+
+  /** Update */
+  const onEdit = (event) => {
+    event.preventDefault();
+    const request = {
+      name: state.name,
+      id: item.id,
+      isCompleted: item.isCompleted
+    };
+
+    fetch(HOST_API + "/todoList", {
+      method: "PUT",
+      body: JSON.stringify(request),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then((todoList) => {
+        dispatch({ type: "update-todoList-item", item: todoList });
+        setState({ name: "" });
+        formRef.current.reset();
+      });
+  }
+
+  return <form ref={formRef}>
+    <input
+      type="text"
+      name="name"
+      placeholder="To-Do List"
+      defaultValue={item.name}
+      onChange={(event) => {
+        setState({ ...state, name: event.target.value })
+      }}  ></input>
+    {item.id && <button onClick={onEdit}>Update list</button>}
+    {!item.id && <button onClick={onAdd}>New list</button>}
+  </form>
+}
+
+
 export default Form;
+
+  
