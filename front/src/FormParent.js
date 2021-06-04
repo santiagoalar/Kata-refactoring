@@ -1,11 +1,12 @@
 import React, { useContext, useRef, useState } from 'react';
+import FormToDo from './Form';
 import { HOST_API } from './App';
 import {Store} from './StoreProvider';
 
 const Form = () => {
     const formRef = useRef(null);
-    const { dispatch, state: { todo } } = useContext(Store);
-    const item = todo.item;
+    const { dispatch, state: { listTodo } } = useContext(Store);
+    const item = listTodo.item;
     const [state, setState] = useState(item);
   
     const onAdd = (event) => {
@@ -14,9 +15,8 @@ const Form = () => {
       const request = {
         name: state.name,
         id: null,
-        completed: false
       };
-      onFetch("POST", "add-item", request)
+      onFetch("POST", "add-list", request)
     }
   
     const onEdit = (event) => {
@@ -27,7 +27,7 @@ const Form = () => {
         id: item.id,
         completed: item.completed
       };
-      onFetch("PUT", "update-item", request)
+      onFetch("PUT", "update-list", request)
     }
 
     function onFetch(item_method, item_type, request){
@@ -46,7 +46,7 @@ const Form = () => {
             });
     }
   
-    return <form ref={formRef}>
+    return <div ref={formRef}>
       <input
         type="text"
         name="name"
@@ -57,7 +57,8 @@ const Form = () => {
         }}  ></input>
       {item.id && <button onClick={onEdit}>Update list</button>}
       {!item.id && <button onClick={onAdd}>Create new list</button>}
-    </form>
+      <FormToDo/>
+    </div>
   }
   
 export default Form;
