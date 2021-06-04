@@ -23,8 +23,8 @@ public class TodoListService {
         return todoListRespository.findById(id).orElseThrow();
     }
 
-    public void delete(ToDoList toDoList){
-        todoListRespository.delete(toDoList);
+    public void delete(Long id){
+        todoListRespository.delete(get(id));
     }
 
 }

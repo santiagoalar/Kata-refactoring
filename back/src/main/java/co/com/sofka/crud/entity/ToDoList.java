@@ -1,20 +1,19 @@
 package co.com.sofka.crud.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "Todolist_table")
 public class ToDoList {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-
     private String name;
 
-    private List<Todo> todos;
+    @OneToMany(mappedBy = "groupListId", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    private List<Todo> todoList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -32,11 +31,11 @@ public class ToDoList {
         this.name = name;
     }
 
-    public List<Todo> getTodos() {
-        return todos;
+    public List<Todo> getTodoList() {
+        return todoList;
     }
 
-    public void setTodos(List<Todo> todos) {
-        this.todos = todos;
+    public void setTodoList(List<Todo> todoList) {
+        this.todoList = todoList;
     }
 }

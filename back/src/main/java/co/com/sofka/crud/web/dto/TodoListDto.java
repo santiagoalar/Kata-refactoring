@@ -2,13 +2,15 @@ package co.com.sofka.crud.web.dto;
 
 import co.com.sofka.crud.entity.Todo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TodoListDto {
 
     private Long id;
     private String name;
-    private List<Todo> todoList;
+    //private List<Todo> todoList;
+    private List<Todo> todoList = new ArrayList<>();
 
     public Long getId() {
         return id;

@@ -1,9 +1,6 @@
 package co.com.sofka.crud.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Todo_table")
@@ -13,13 +10,13 @@ public class Todo {
     private Long id;
     private String name;
     private boolean completed;
-    private String groupListId;
+    private Long groupListId;
 
-    public String getGroupListId() {
+    public Long getGroupListId() {
         return groupListId;
     }
 
-    public void setGroupListId(String groupListId) {
+    public void setGroupListId(Long groupListId) {
         this.groupListId = groupListId;
     }
 

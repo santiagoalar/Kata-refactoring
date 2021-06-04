@@ -2,8 +2,6 @@ package co.com.sofka.crud.controller;
 
 import co.com.sofka.crud.entity.ToDoList;
 import co.com.sofka.crud.service.TodoListService;
-import co.com.sofka.crud.service.TodoService;
-import co.com.sofka.crud.web.dto.TodoDto;
 import co.com.sofka.crud.web.dto.TodoListDto;
 import co.com.sofka.crud.web.mapper.TodoListMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +48,6 @@ public class TodoListController {
     @DeleteMapping(value = "{id}/todoList")
     public void delete(@PathVariable("id") Long id){
         todoListService.delete(id);
-        //This part should delete todoList and each todo by groupListId
     }
 
 
