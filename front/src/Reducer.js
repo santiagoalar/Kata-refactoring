@@ -53,9 +53,19 @@ function reducer(state, action) {
       todoListUpEdit.item = action.item;
       return { ...state, todoList: todoListUpEdit }
     case 'add-item':
-      const todoUp = state.todo.items;
-      todoUp.push(action.item);
-      return { ...state, todo: { items: todoUp, item: {} } }
+      const todoListUp1 = state.todoList;
+      /*todoUp.push(action.item);
+      return { ...state, todo: { items: todoUp, item: {} } }*/
+      const listUpdatePush = todoListUp1.items.map((item) => {
+        if (item.id === action.item.groupListId) {
+          const updatedTodoList = item.todoList.push(action.item);
+          return updatedTodoList;
+        }
+        return item;
+      });
+
+      return { ...state, todos: listUpdatePush }
+
     case 'add-todoList-item':
       const todoListUp = state.todoList.items;
       todoListUp.push(action.item);

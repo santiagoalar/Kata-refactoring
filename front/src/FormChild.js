@@ -3,10 +3,11 @@ import React, { useContext, useRef, useState } from 'react';
 import { HOST_API } from './App';
 import {Store} from './StoreProvider';
 
-const Form = () => {
+const Form = (props) => {
   const formRef = useRef(null);
   const { dispatch, state: { todoList } } = useContext(Store);
   const item = todoList.item;
+  const id_todoList = props.id_todoList;
   const [state, setState] = useState(item);
 
   /** Create - Working */
@@ -15,9 +16,10 @@ const Form = () => {
     const request = {
       name: state.name,
       id: null,
-      completed: false
+      completed: false,
+      groupListId: id_todoList
     };
-    fetch(HOST_API + "/todoList", {
+    fetch(HOST_API + "/todo", {
       method: "POST",
       body: JSON.stringify(request),
       headers: {
@@ -26,7 +28,7 @@ const Form = () => {
     })
       .then(response => response.json())
       .then((todoList) => {
-        dispatch({ type: "add-todoList-item", item: todoList });
+        dispatch({ type: "add-item", item: todoList });
         setState({ name: "" });
         formRef.current.reset();
       });
@@ -41,7 +43,7 @@ const Form = () => {
       isCompleted: item.isCompleted
     };
 
-    fetch(HOST_API + "/todoList", {
+    fetch(HOST_API + "/todo", {
       method: "PUT",
       body: JSON.stringify(request),
       headers: {
@@ -50,7 +52,7 @@ const Form = () => {
     })
       .then(response => response.json())
       .then((todoList) => {
-        dispatch({ type: "update-todoList-item", item: todoList });
+        dispatch({ type: "update-item", item: todoList });
         setState({ name: "" });
         formRef.current.reset();
       });

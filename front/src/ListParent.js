@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import {HOST_API } from './App';
 import {Store} from './StoreProvider';
-import FormChild from './FormChild'
+import FormChild from './FormChild';
+import ListChild from './ListChild';
 
 const List = () => {
   const { dispatch, state: { todoList } } = useContext(Store);
@@ -34,8 +35,8 @@ const List = () => {
             {todoList.id}            {todoList.name}
             <button onClick={() => onDelete(todoList.id)}>Eliminar</button>
             <button onClick={() => onEdit(todoList)}>Editar</button>
-            <FormChild/>
-            
+            <FormChild id_todoList={todoList.id}/>
+            <ListChild items={todoList.todoList}/>
           </div>
           
         })}
