@@ -1,6 +1,7 @@
 package co.com.sofka.crud.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ public class ToDoList {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    
+    @NotBlank(message = "Name may not be null")
     private String name;
 
     @OneToMany(mappedBy = "groupListId", orphanRemoval = true, cascade = CascadeType.PERSIST)

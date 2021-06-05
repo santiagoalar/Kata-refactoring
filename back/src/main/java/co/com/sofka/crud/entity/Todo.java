@@ -1,6 +1,7 @@
 package co.com.sofka.crud.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Todo_table")
@@ -8,6 +9,8 @@ public class Todo {
     @Id
     @GeneratedValue
     private Long id;
+
+    @NotBlank(message = "Name may not be null")
     private String name;
     private boolean completed;
     private Long groupListId;
