@@ -29,9 +29,15 @@ const List = () => {
     dispatch({ type: "edit-todoList-item", item: todoList })
   };
 
+  const style_div = {
+    borderStyle: "dotted",
+    margin: 15,
+    textAlign: "left"
+  }
+
   return <div>
         {currentList.map((todoList) => {
-          return <div key={todoList.id}>
+          return <div key={todoList.id} style={style_div}>
             {todoList.id}            {todoList.name}
             <button onClick={() => onDelete(todoList.id)}>Eliminar</button>
             <button onClick={() => onEdit(todoList)}>Editar</button>
